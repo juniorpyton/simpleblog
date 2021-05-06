@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>User Profile</h1>
+
+{{ page_user }}
+
+<br/>
+<br/>
+<br/>
+
+	<img src="{{ page_user.profil_pic.url}}" width="200" height="200 "class="rounded-circle"><br/>
+
+<br/>
+<br/>
+<p>{{ page_user.bio}}
+
+{% endblock %}
+

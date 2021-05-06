@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog Post Comments{% endblock %}
+{% block content %}
+
+<h1>Comments Blog Post</h1>
+
+<div class="form-group">
+<form method="POST" enctype="multipart/form-data">
+<br>
+	{% csrf_token %}
+ 	{{ form.media }}
+ 	{{ form.as_p }}
+ 	<button class="btn btn-success">Add Comment</button>
+ </div>
+<script>
+	
+
+
+</script>
+
+{% endblock %}
+

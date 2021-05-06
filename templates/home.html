@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Post</h1>
+<ul>
+{% for post in object_list %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+	<strong><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a></strong> <br/>
+	<strong><a href="{% url 'category' post.category %}">{{post.category}}</a></strong><br/>
+	<strong>{{post.post_date}}</strong><br/>
+	<strong>{{post.author}}</strong><br/>
+	<p>{{ post.body|slice:":300"|safe }}</p>
+
+	{% if user.is_authenticated and user.id == post.author.id %}
+		<a href="{% url 'update_post' post.pk %}" class="btn btn-warning">Edit</a>
+		<a href="{% url 'delete_post' post.pk %}" class="btn btn-danger">Delete</a>
+     
+	{%endif%}
+</div>
+
+{% endfor %}
+</ul>
+
+
+{% endblock %}
+

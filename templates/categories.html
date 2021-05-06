@@ -1,0 +1,26 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+	<h1>{{cats}} | Category Post</h1>
+	<ul>
+		{% for  post in category_post %}
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		<strong><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a></strong> <br/>
+		<strong><a href="{% url 'category' post.category %}">{{post.category}}</a></strong><br/>
+		<strong>{{post.post_date}}</strong><br/>
+		<p>{{ post.body|slice:":300" }}</p>
+
+		{% if user.is_authenticated %}
+			<a href="{% url 'update_post' post.pk %}" class="btn btn-warning">Edit</a>
+			<a href="{% url 'delete_post' post.pk %}" class="btn btn-danger">Delete</a>
+		{%endif%}
+		</div>
+	</ul>
+	{% endfor %}
+
+
+
+{% endblock %}

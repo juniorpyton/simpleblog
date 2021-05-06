@@ -1,0 +1,21 @@
+ {% extends 'base.html' %}
+
+{% block title %}Edit Profil Page{% endblock %}
+{% block content %}
+
+<h1>Edit Profile </h1>
+<br/>
+
+<img src="{{ post.author.profile.profile_pic.url }}">
+<br/>
+<div class="form-group">
+<form method="POST">
+<br>
+	{% csrf_token %}
+ 	{{ form.as_p }}
+ 	<button class="btn btn-success">Update Profil</button>
+ </div>
+
+
+{% endblock %}
+
