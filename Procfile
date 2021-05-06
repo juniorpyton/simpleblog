@@ -1,1 +1,1 @@
-web : gunicorn simpleblog.wsgi
+web: gunicorn --bind 0.0.0.0:$PORT simpleblog.wsgi
