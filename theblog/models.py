@@ -50,3 +50,14 @@ class Comment(models.Model):
 
 	def __str__(self):
 		return '%s - %s' % (self.post, self.name)
+
+class Contact(models.Model):
+	name = models.CharField(max_length=255)
+	email = models.CharField(max_length=255)
+	contactbody = RichTextField(blank=True, null=True)
+
+	def __str__(self):
+		return self.name + ' | ' + str(self.email)
+
+	def get_absolute_url(self):
+		return reverse('home')

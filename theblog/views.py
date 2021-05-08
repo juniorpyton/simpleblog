@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post , Category, Comment
+from .models import Post , Category, Comment, Contact
 from .forms import PostForm , CommentForm
 from django.urls import reverse_lazy
 
@@ -58,3 +58,9 @@ class AddCommentView(CreateView):
 		form.instance.post_id = self.kwargs['pk']
 		return super().form_valid(form)
 	success_url  = reverse_lazy('home')
+
+class AddContactView(CreateView):
+	model = Contact
+	template_name = 'contact.html'
+	fields = '__all__'
+	success_url = reverse_lazy('home')

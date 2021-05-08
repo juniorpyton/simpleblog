@@ -36,7 +36,7 @@
 				<div class="col-md-7">
 					<div class="card-block">
 						<h2 class="card-title"><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a></h2>
-						<h4 class="card-text">{{ post.body|slice:":150"|safe }}.</h4>
+						<h4 class="card-text">{{ post.body|slice:":100"|safe }}.</h4>
 						<div class="metafooter">
 							<div class="wrapfooter">
 								
@@ -44,7 +44,7 @@
 								<a href="author.html"><img class="author-thumb" src="{{ post.author.profile.profil_pic.url }}" alt="image"></a>
 								</span>
 								<span class="author-meta">
-								<span class="post-name"><a href="{% url 'show_profile_page' post.author.profile.id %}">{{post.author}}</a></span><br/>
+								<span class="post-name"><a href="{% url 'show_profile_page' post.author.profile.id %}">{{post.author.first_name}}</a></span><br/>
 								<span class="post-date">{{post.post_date}}</span>
 								</span>
 								<span class="post-read-more"><a href="{% url 'category' post.category %}" title="Kategori">{{post.category}}</a></span>
