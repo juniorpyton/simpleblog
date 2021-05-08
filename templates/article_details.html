@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}{{post.title}}{% endblock %}
+{% block title %}{{post.title}} - {{ post.category}}{% endblock %}
 {% block content %}
-
 
 
 <!-- Değişkenler
 ================================================== ->{{ user.profile.bio}} {{ user.first_name }} ->
+
+
 
 <!-- Begin Top Author Page
 ================================================== -->
@@ -16,23 +17,18 @@
 		<div class="col-md-8 col-md-offset-2">
 			<div class="mainheading">
 				<div class="row post-top-meta authorpage">
-					<div class="col-md-2 col-xs-12">
-						
-						{% if post.author.profile.profil_pic.url %}
-							<img class="author-thumb" src="{{ post.author.profile.profil_pic.url }}" alt="{{ user.first_name }}" title="test">
-
-
-						{% else %}
-							<img src="{% static 'theblog/images/default-pic.png' %}  " width="200" height="200" class="rounded-circle">
-						{% endif %}
-						
-					</div>
 					<div class="col-md-10 col-xs-12">
-						<strong><span class="author-description"></span>{{ post.author.first_name }}</strong>
-						<span class="author-description">Founder of <a target="_blank" href="https://www.wowthemes.net">WowThemes.net</a> and creator of <strong>"Mediumish"</strong> </span>
-
+						<h3>{{ post.author.first_name }}</h3>
+						<span class="author-description">Founder of <a target="_blank" href="https://www.wowthemes.net">WowThemes.net</a> and creator of <strong>"Mediumish"</strong> theme that you're currently previewing. I professionally develop premium themes, templates & scripts since the Apocalypse (2012). You can reach me out on the social links below.</span>
 						<div class="sociallinks"><a  target="_blank" href="https://www.facebook.com/wowthemesnet/"><i class="fa fa-facebook"></i></a> <span class="dot"></span> <a target="_blank" href="https://plus.google.com/s/wowthemesnet/top"><i class="fa fa-google-plus"></i></a><span class="dot"></span> 
 						<a  target="_blank" href="{{ user.profile.fb_url }}"><i class="fa fa-linkedin"></i></a> <span class="dot"></span> </div>
+					</div>
+					<div class="col-md-2 col-xs-12">
+						{% if post.author.profile.profil_pic.url %}
+							<a href="{% url 'show_profile_page' post.author.profile.id %}"><img class="author-thumb" src="{{ post.author.profile.profil_pic.url }}" alt="{{ user.first_name }}" title="{{ user.first_name }}" ></a>
+						{% else %}
+							<img src="{% static 'theblog/images/default-pic.png' %}  " width="300" height="300" class="rounded-circle">
+						{% endif %}		
 					</div>
 				</div>
 			</div>
@@ -41,8 +37,6 @@
 </div>
 <!-- End Top Author Meta
 ================================================== -->
-
-
 
 <div class="container">
 	<div class="row">
@@ -85,8 +79,9 @@
 		<div class="col-md-8 col-md-offset-2 col-xs-12">
 			<div class="mainheading">
 
-				<h1 class="posttitle">{{post.title}}</h1>
-				<div >
+				<h2 class="posttitle">{{post.title}}</h2>
+
+				<div class="pull-right">
 					{{post.post_date}} |  <a href="{% url 'category' post.category %}">{{ post.category}}</a>
 			</div>
 
@@ -122,34 +117,39 @@
 </div>
 <!-- End Article
 ================================================== -->
-
-
-
 <div class="container">
 	<div class="row">
-		<div class="col-md-2"></div>
-	{% if not post.comments.all %}
-		<h2>Not Comments Yet..<a href="{% url 'add_comment' post.pk %}">Add One</a></h2>
-	{%else%}
-	<div class="col-md-10 col-xs-12">
-	<a href="{% url 'add_comment' post.pk %}" class="btn follow">Add Comments</a>
-</div>
-	{% for comment in post.comments.all %}
-		<div class="container">
-			<div class="row">
-			<div class="col-md-2"></div>
-				<figure class="text-end">
-				  <blockquote class="blockquote">
-				    <p>{{ comment.body }}</p>
-				  </blockquote>
-				  <figcaption class="blockquote-footer">
-				    {{ comment.date_added }} <cite title="Source Title">{{ comment.name }}</cite>
-				  </figcaption>
-				</figure>
-			</div>	
+		<!-- Begin Fixed Left Share -->
+	 	<div class="col-md-2 col-xs-12"></div>
+		<div class="col-md-8 col-md-offset-2 col-xs-12">
+				{% if not post.comments.all %}
+				<div class="container">
+							<div class="row">
+								<figure class="text-end">
+								  <blockquote class="blockquote">
+								   <p>Not Comments Yet..<a href="{% url 'add_comment' post.pk %}">Add One</a></p>
+								  </blockquote>
+							</div>	
+						</div>
+					{%else%}
+			<div class="col-md-10 col-xs-12 pull" > 
+				<a href="{% url 'add_comment' post.pk %}" class="btn follow">Add Comments</a></div>
+					{% for comment in post.comments.all %}
+						<div class="container">
+							<div class="row">
+								<figure class="text-end">
+								  <blockquote class="blockquote">
+								    <p>{{ comment.body }}</p>
+								  </blockquote>
+								  <figcaption class="blockquote-footer">
+								    {{ comment.date_added }} <cite title="Source Title">{{ comment.name }}</cite>
+								  </figcaption>
+								</figure>
+							</div>	
+						</div>
+					{% endfor %}
+			{% endif %}
 		</div>
-	{% endfor %}
-	{% endif %}
 	</div>
 </div>
 {% endblock %}

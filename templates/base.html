@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="assets/img/favicon.ico">
-<title>  Test </title>
+<link rel="icon" href="/static/theblog/images/favicon.ico">
+<title>  {% block title %} My first blog django {% endblock %} </title>
 <!-- Bootstrap core CSS -->
 <link href="/static/theblog/css/bootstrap.min.css" rel="stylesheet">
 <!-- Fonts -->
@@ -28,7 +28,7 @@
 <div class="container">
   <!-- Begin Logo -->
   <a class="navbar-brand" href="{% url 'home' %}">
-  <img src="/static/theblog/images/logo.png" alt="logo">
+  <img src="/static/theblog/images/logo.png" alt="logo" class="responsive">
   </a>
   <!-- End Logo -->
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
@@ -94,10 +94,10 @@
   <div class="container">
   <div class="footer">
     <p class="pull-left">
-       Copyright &copy; 2021 My Blog Page
+       Copyright &copy; 2021 My Blog
     </p>
     <p class="pull-right">
-       My Blog Theme <a target="_blank" href="{% url 'home' %}">MesutKaramehmet</a>
+      <a target="_blank" href="{% url 'home' %}">Mesut Karamehmet</a>
     </p>
     <div class="clearfix">
     </div>
