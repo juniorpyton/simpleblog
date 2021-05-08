@@ -142,11 +142,6 @@ STATICFILES_DIRS = (
     )
 
 
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
@@ -158,4 +153,5 @@ LOGOUT_REDIRECT_URL ='home'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+django_heroku.settings(locals())
 
