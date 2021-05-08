@@ -3,24 +3,47 @@
 
 {% block content %}
 
-
-	<h1>{{cats}} | Category Post</h1>
-	<ul>
+<section class="featured-posts">
+	
+	<div class="section-title">
+		<h2><span>{{cats}}</span></h2>
+	</div>
+	<div class="card-columns listfeaturedtag">
 		{% for  post in category_post %}
-		<div class="alert alert-warning alert-dismissible fade show" role="alert">
-		<strong><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a></strong> <br/>
-		<strong><a href="{% url 'category' post.category %}">{{post.category}}</a></strong><br/>
-		<strong>{{post.post_date}}</strong><br/>
-		<p>{{ post.body|slice:":300" }}</p>
+		<!-- begin post -->
+		<div class="card">
+			<div class="row">
+				<div class="col-md-5 wrapthumbnail">
+					<a href="post.html">
+						<div class="thumbnail" style="background-image:url(/media/{{post.header_image}});">
+						</div>
+				</div>
 
-		{% if user.is_authenticated %}
-			<a href="{% url 'update_post' post.pk %}" class="btn btn-warning">Edit</a>
-			<a href="{% url 'delete_post' post.pk %}" class="btn btn-danger">Delete</a>
-		{%endif%}
+				<div class="col-md-7">
+					<div class="card-block">
+						<h2 class="card-title"><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a></h2>
+						<h4 class="card-text">{{ post.body|slice:":150"|safe }}.</h4>
+						<div class="metafooter">
+							<div class="wrapfooter">
+								
+								<span class="meta-footer-thumb">
+								<a href="author.html"><img class="author-thumb" src="{{ post.author.profile.profil_pic.url }}" alt="image"></a>
+								</span>
+								<span class="author-meta">
+								<span class="post-name"><a href="{% url 'show_profile_page' post.author.profile.id %}">{{post.author}}</a></span><br/>
+								<span class="post-date">{{post.post_date}}</span>
+								</span>
+								<span class="post-read-more"><a href="{% url 'category' post.category %}" title="Kategori">{{post.category}}</a></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-	</ul>
-	{% endfor %}
-
+		<!-- end post -->
+		{% endfor %}
+	</div>
+	</section>
 
 
 {% endblock %}

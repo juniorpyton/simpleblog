@@ -10,10 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
-import django_heroku
 from pathlib import Path
-import dj_database_url
-from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-r=$@1wnu$b8sgpr07@+3(=*klni3l!7atx6+%-h6-%qm2=e8aw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -53,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+
 
 
 ]
@@ -141,7 +139,7 @@ STATICFILES_DIRS = (
         os.path.join(BASE_DIR,'static'),
     )
 
-STATICFILES_STOREAGE = 'whitenoise.storage.CompressedManifestStativFilesStorage'
+
 
 LOGIN_REDIRECT_URL ='home'
 LOGOUT_REDIRECT_URL ='home'
@@ -151,4 +149,4 @@ LOGOUT_REDIRECT_URL ='home'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-django_heroku.settings(locals())
+
